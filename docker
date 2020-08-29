@@ -1,0 +1,8 @@
+# chạy một container từ image
+docker run --privileged -d -p 808:80 centos:7 /sbin/init
+
+# truy cập vào container mới chạy
+docker exec -it [ID docker ps] /bin/bash
+
+# cp file vào container
+docker cp thoitrangdb 352d7eef5297:/root
