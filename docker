@@ -6,3 +6,29 @@ docker exec -it [ID docker ps] /bin/bash
 
 # cp file vào container
 docker cp thoitrangdb 352d7eef5297:/root
+
+# push lên docker hub
+docker login -u quanhk711
+docker tag webserver:v1 quanhk711/dockerhub:webserver
+docker push quanhk711/dockerhub:webserver
+# dockerfile
+from: lấy images trên docker hub
+lable: thông tin người viết file
+env:  biến môi trường                       
+run: chỉ chạy khi build images, cài các gói vào container
+coppy: sao chép file vào thư mục container
+add: giống coppy
+cmd: trong dockerfile chỉ có 1 cmd, chỉ chạy khi thực hiện docker run
+workdir: thiết lập thư mục làm việc 
+expose: khai báo port
+arg: khai báo biến
+
+
+# dừng toàn bộ container
+docker stop $(docker ps -a -q)
+
+#xóa taonf bộ container
+docker rm $(docker ps -a)
+
+#xóa toàn bộ images
+docker rmi -f $(docker images -a -q)
