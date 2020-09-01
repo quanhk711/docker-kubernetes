@@ -33,4 +33,9 @@ docker rm $(docker ps -a)
 #xóa toàn bộ images
 docker rmi -f $(docker images -a -q)
 
-#
+# dokerfile
+ build image
+  docker build -t httpd_sample .
+ chạy container
+  docker run -d -p 80:80 httpd_sample
+ 
