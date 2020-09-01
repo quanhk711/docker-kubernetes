@@ -27,8 +27,10 @@ arg: khai báo biến
 # dừng toàn bộ container
 docker stop $(docker ps -a -q)
 
-#xóa taonf bộ container
+#xóa taon bộ container
 docker rm $(docker ps -a)
 
 #xóa toàn bộ images
 docker rmi -f $(docker images -a -q)
+
+#
