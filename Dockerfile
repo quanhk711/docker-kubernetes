@@ -14,8 +14,10 @@ RUN echo "baseurl = http://yum.mariadb.org/10.4/centos7-amd64" >> /etc/yum.repos
 RUN echo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB" >> /etc/yum.repos.d/mariadb.repo
 RUN echo "gpgcheck=1" >> /etc/yum.repos.d/mariadb.repo
 RUN yum -y install mariadb-server
+RUN echo "ServerName localhost" >> /etc/httpd/conf/httpd.conf
 
 WORKDIR /root
 ADD ./code_web/ /root
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+CMD [ "/usr/sbin/init" ]
+#CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 EXPOSE 80
