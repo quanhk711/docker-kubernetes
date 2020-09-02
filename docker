@@ -1,3 +1,26 @@
+# lệnh docker hay dùng
+docker images -a
+docker pull nameimage:tag
+docker container ls --all
+docker run -it ubuntu
+ -Tạo và chạy container, container tự xóa khi kết thúc thì thêm vào tham số --rm
+docker run -it --rm ubuntu
+-Tạo và chạy container - khi container chạy thi hành ngay một lệnh nào đó, ví dụ ls -la
+docker run -it --rm debian ls -la
+-Tạo và chạy container - ánh xạ một thự mục máy host vào một thư mục container, chia sẻ dữ liệu
+docker run -it --rm -v path-in-host:path-in-container debian
+-Chạy một container đang dừng
+docker container start -i containerid
+
+#Lưu Container thành Image
+docker commit mycontainer myimage:version
+#Lưu Image ra file, Nạp image từ file
+docker save --output myimage.tar myimage
+
+#Đổi tên một Image đang có
+docker tag image_id imagename:version
+
+
 # chạy một container từ image
 docker run --privileged -d -p 808:80 centos:7 /sbin/init
 docker run --privileged -d -it -p 808:80 centos:7 /sbin/init
@@ -12,6 +35,7 @@ docker cp thoitrangdb 352d7eef5297:/root
 docker login -u quanhk711
 docker tag webserver:v1 quanhk711/dockerhub:webserver
 docker push quanhk711/dockerhub:webserver
+
 # dockerfile
 from: lấy images trên docker hub
 lable: thông tin người viết file
