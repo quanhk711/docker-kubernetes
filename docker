@@ -1,8 +1,10 @@
 # lệnh docker hay dùng
+
 docker images -a
 docker pull nameimage:tag
 docker container ls --all
 docker run -it ubuntu
+
  -Tạo và chạy container, container tự xóa khi kết thúc thì thêm vào tham số --rm
 docker run -it --rm ubuntu
 -Tạo và chạy container - khi container chạy thi hành ngay một lệnh nào đó, ví dụ ls -la
@@ -91,3 +93,6 @@ docker rmi -f $(docker images -a -q)
  chạy container
   docker run -d -p 80:80 httpd_sample
  
+xxxx cai them goi cho php
+docker-php-ext-install mysql
+php -m
