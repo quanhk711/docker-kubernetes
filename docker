@@ -44,9 +44,36 @@ run: chỉ chạy khi build images, cài các gói vào container
 coppy: sao chép file vào thư mục container
 add: giống coppy
 cmd: trong dockerfile chỉ có 1 cmd, chỉ chạy khi thực hiện docker run
+    co hai cach de chay
+    shell:cat file.txt
+    exec: ["/command/...","file.txt"]
+
 workdir: thiết lập thư mục làm việc 
 expose: khai báo port
 arg: khai báo biến
+
+
+
+
+
+#network trong container
+docker network create --driver bridge name-network
+- lien ket truc tiep
+--link <ten container can lien ket>
+- liên kết động
+  tạo card mạng 
+    docker network create <ten card>
+--net=<ten card>
+vd: docker run -it --link server --net=inet1 --name=client centos:7 /bin/bash
+
+
+
+#Volume
+mkdir dadta
+docker run  -it -v /home/minhquan/data:/root/data centos:7 /bin/bash
+
+
+
 
 
 # dừng toàn bộ container
