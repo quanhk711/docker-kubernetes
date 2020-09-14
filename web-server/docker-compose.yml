@@ -1,0 +1,61 @@
+version: '3'
+ 
+services:
+ 
+    php:
+        container_name: c-php
+        hostname: php
+        restart: always
+        build:
+            context: ./php
+            dockerfile: Dockerfile
+        networks:
+            - inet3
+        ports:
+            - 9000:9000
+        volumes:
+            - ./httpd/thoitrang:/usr/local/apache2/htdocs/
+        environment:
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+ 
+    httpd:
+        container_name: c-httpd
+        hostname: httpd
+        restart: always
+        image: httpd:latest
+        networks:
+            - inet3                 
+        ports:
+            - 8888:80
+        volumes:
+            - ./httpd/thoitrang:/usr/local/apache2/htdocs/
+            - ./httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
+        depends_on:
+            - php
+ 
+    mysql:
+        container_name: c-mysql
+        hostname: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        image: mysql:latest
+        networks:
+            - inet3
+        ports:
+            - 3306:3306
+        volumes:
+            - ./mysql:/var/lib/mysql
+            - ./my.cnf:/etc/mysql/my.cnf
+            - ./:/home
+        depends_on:
+            - php
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+networks:                            
+  inet3:
+    driver: bridge
