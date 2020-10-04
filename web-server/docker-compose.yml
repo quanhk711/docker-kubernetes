@@ -47,7 +47,7 @@ services:
         volumes:
             - ./mysql:/var/lib/mysql
             - ./my.cnf:/etc/mysql/my.cnf
-            - ./:/home
+            - ./:/docker-entrypoint-initdb.d
         depends_on:
             - php
         environment:
