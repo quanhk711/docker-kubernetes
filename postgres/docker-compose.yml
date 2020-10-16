@@ -1,0 +1,32 @@
+version: '3'
+services:
+  database:
+    image: postgres:latest
+    container_name: postgres
+    hostname: postgres
+    restart: always
+
+    environment: 
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=root
+    ports: 
+      - "2345:5432"
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    command: postgres -c logging_collector=on -c log_destination=stderr -c log_directory=/logs
+    volumes:
+      - ./postgres.conf:/etc/postgresql/postgresql.conf
+      - ./logs:/logs
+      - ./postgresql_data:/var/lib/postgresql/data
+    
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "test123!"
+    ports: 
+      - "16543:80"
+    depends_on: 
+      - database   
+
